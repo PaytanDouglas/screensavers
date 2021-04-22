@@ -1,0 +1,112 @@
+html, body {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: consolas;
+}
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section h2 {
+  font-size: 10em;
+  color: pink;
+}
+section span {
+  position: absolute;
+  bottom: -50px;
+  background: transparent;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: inset 0 0 10px rgba(235, 0, 54, 0.7);
+  animation: animate 4s linear infinite;
+}
+sectionspan: before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.25) translate(-70%, -70%);
+  background: radial-gradient(#ffffff, transparent);
+  border-radius: 50%;
+}
+@keyframes animation {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  99% {opacity: 1;}
+  100% {
+    transform: translateY(-1200%);
+    opacity: ;
+  }
+}
+
+/* RIPPLE EFFECT */
+[anim=ripple] {
+  position: relative;
+  overflow: hidden;
+}
+[anim=ripple]:before {
+  content: "";
+  position: absolute;
+  display: block;
+  background: var(--ripple-background, black);
+  border-radius: 50%;
+  pointer-events: none;
+  top: calc(var(--y) * 1px);
+  left: calc(var(--x) * 1px);
+  width: calc(var(--d) * 1px);
+  height: calc(var(--d) * 1px);
+  opacity: calc(var(--o, 1) * var(--ripple-opacity, 0.3));
+  transition: calc(var(--t, 0) * var(--ripple-duration, 600ms)) var(--ripple-easing, linear);
+  transform: translate(-50%, -50%) scale(var(--s, 1));
+  transform-origin: center;
+}
+
+h2 {
+  --ripple-background: white;
+  --ripple-opacity: 0.1;
+  --ripple-duration: 600ms;
+  min-width: 200px;
+  text-align: center;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: background-color 300ms;
+}
+h2:hover {background-color: transparent;}
+.rainbow {
+  --ripple-opacity: 1;
+  --ripple-background: radial-gradient(circle at center, rebeccapurple, dodgerblue, olive, gold, orange, tomato);
+  --ripple-duration: 2000ms;
+  --ripple-easing: cubic-bezier(0, .5, .5, 1);
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background-color 300ms, color 300ms;
+}
+.rainbow:hover {
+  background-color: transparent;
+  color: white;
+}
+
+/* MAKES THE RAINBOW CLICK SPAN WHOLE PAGE */
+.echo {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
