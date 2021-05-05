@@ -1,0 +1,22 @@
+html {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient();
+}
+body {
+  display: block;
+}
+a {
+  text-align: center;
+  color: red;
+  text-decoration: none;
+  font-size: 3em;
+  font-family: fantasy;
+}
+button {
+  background-color: pink;
+  margin: 150px 0px auto;
+  width: 100%;
+  padding: 2em;
+}

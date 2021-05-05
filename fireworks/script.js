@@ -2,7 +2,7 @@
 
 //FIREWORKS JS FILE
 function Firework() {
-  this.hue = random(255);
+  this.hue = random(255);                         //gives fireworks their hue
   this.firework = new Particle(random(width), height, this.hue, true);
   this.exploded = false;
   this.particles = [];
@@ -17,16 +17,16 @@ function Firework() {
   };
 
   this.update = function() {
-    if (!this.exploded) {
-      this.firework.applyForce(gravity);
+    if (!this.exploded) {                 //checks to see if firework exploded
+      this.firework.applyForce(gravity);  //if yes, make the particles fall
       this.firework.update();
       if (this.firework.vel.y >= 0) {
-        this.exploded = true;
-        this.explode();
+        this.exploded = true;             //change the exploded value to true
+        this.explode();                   //and explode the particle
       }
     }
-    for (var i = this.particles.length - 1; i >= 0; i--) {
-      this.particles[i].applyForce(gravity);
+    for (var i = this.particles.length - 1; i >= 0; i--) {  //shows how far up
+      this.particles[i].applyForce(gravity);                //the fireworks go
       this.particles[i].update();
       if (this.particles[i].done()) {
         this.particles.splice(i, 1);
@@ -34,30 +34,30 @@ function Firework() {
     }
   };
 
-  this.explode = function() {
-    for (var i = 0; i < 100; i++) {
+  this.explode = function() {           //how to explode the particle
+    for (var i = 0; i < 100; i++) {     //how many exploded particles
       var p = new Particle (
-        this.firework.pos.x,
+        this.firework.pos.x,            //show their position as they fall
         this.firework.pos.y,
-        this.hue,
+        this.hue,                       //fade their color
         false
       );
-      this.particles.push(p);
+      this.particles.push(p);           //make them fall
     }
   };
 
-  this.show = function() {
+  this.show = function() {              //show the exploded firework
     if (!this.exploded) {
       this.firework.show();
     }
-    for (var i = 0; i < this.particles.length; i++) {
-      this.particles[i].show();
+    for (var i = 0; i < this.particles.length; i++) {   //display the tail of the
+      this.particles[i].show();                         //firework
     }
   };
 }
 
 //PARTICLE JS FILE
-function Particle(x, y, hue, firework) {
+function Particle(x, y, hue, firework) {        //make up the firework
   this.pos = createVector(x, y);
   this.firework = firework;
   this.lifespan = 255;
@@ -65,18 +65,18 @@ function Particle(x, y, hue, firework) {
   this.acc = createVector(0, 0);
 
   if (this.firework) {
-    this.vel = createVector(0, random(-12, -8));
+    this.vel = createVector(0, random(-12, -8));    //controls height of firework
   }
   else {
     this.vel = p5.Vector.random2D();
-    this.vel.mult(random(2, 10));
+    this.vel.mult(random(2, 15));          //controls how far the firework explodes
   }
 
-  this.applyForce = function(force) {
+  this.applyForce = function(force) {     //gravity for fireworks
     this.acc.add(force);
   };
 
-  this.update = function() {
+  this.update = function() {        //make sure the firework explodes
     if (!this.firework) {
       this.vel.mult(0.9);
       this.lifespan -= 4;
@@ -86,7 +86,7 @@ function Particle(x, y, hue, firework) {
     this.acc.mult(0);
   };
 
-  this.done = function() {
+  this.done = function() {        //once the firework explodes, fade it
     if (this.lifespan < 0) {
       return true;
     }
@@ -95,17 +95,17 @@ function Particle(x, y, hue, firework) {
     }
   };
 
-  this.show = function() {
+  this.show = function() {      //display the firework
     colorMode(HSB);
     if (!this.firework) {
       strokeWeight(2);
       stroke(hue, 255, 255, this.lifespan);
     }
     else {
-      strokeWeight(4);
-      stroke(hue, 255, 255);
+      strokeWeight(4);                  //at this size
+      stroke(hue, 255, 255);            //in this color
     }
-    point(this.pos.x, this.pos.y);
+    point(this.pos.x, this.pos.y);      //at this position
   };
 }
 
@@ -113,28 +113,28 @@ function Particle(x, y, hue, firework) {
 var fireworks = [];
 var gravity;
 
-function setup() {
+function setup() {                  //basic setup for the canvas
   createCanvas(1024, 768);
   colorMode(HSB);
-  gravity = createVector(0, 0.1);
+  gravity = createVector(0, 0.1);   //how high the particles go
   stroke(255);
-  strokeWeight(4);
+  strokeWeight(4);                  //how thick/bold/big the particles are
   background(0);
 }
 
-function draw() {
-  colorMode(RGB);
-  background(0, 0, 0, 25);
-  if (random(1) < 0.04) {
+function draw() {                   //make the firework
+  colorMode(RGB);                   //their color
+  background(0, 0, 0, 25);          //the screen color
+  if (random(1) < 0.04) {           //how high they go
     fireworks.push(new Firework());
   }
 
-  for (var i = fireworks.length - 1; i >= 0; i--) {
-    fireworks[i].update();
+  for (var i = fireworks.length - 1; i >= 0; i--) {   //to update the particle
+    fireworks[i].update();                            //and show its position
     fireworks[i].show();
 
     if (fireworks[i].done()) {
-      fireworks.splice(i, 1);
+      fireworks.splice(i, 1);                 //make another once one explodes
     }
   }
 }

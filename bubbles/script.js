@@ -1,23 +1,23 @@
 function createBubble() {
-	const section = document.querySelector("Section");
-	const createElement =	document.createElement("span");
-	var size = Math.random() * 60;
+	const section = document.querySelector("Section");			//draws from the HTML
+	const createElement =	document.createElement("span");		//sections
+	var size = Math.random() * 60;											//makes rando width 4 bubbles
 
 	createElement.style.animation =
 	"animation 6s linear infinite";
-	createElement.style.width = 180 + size + "px";
-	createElement.style.height = 180 + size + "px";
-	createElement.style.left =
+	createElement.style.width = 180 + size + "px";			//specifications for outer
+	createElement.style.height = 180 + size + "px";			//bubbles ring
+	createElement.style.left =													//where the bubbles fade in
 	Math.random() * innerWidth + "px";
 	section.appendChild(createElement);
 
 	setTimeout(() => {
-		createElement.remove();
-	}, 4000);
+		createElement.remove();								//how far up bubbles stay on screen
+	}, 4000);																//in pixels
 }
 
-setInterval(createBubble, 100);
-
+setInterval(createBubble, 150);					//how many bubbles on screen
+																				//high # = fewer bubbles
 
 //RIPPLE EFFECT
 [].map.call(document.querySelectorAll('[anim="ripple"]'), el=> {

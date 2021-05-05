@@ -10,26 +10,25 @@ html, body {
 }
 section {
   position: relative;
-  width: 100%;
+  width: 100%;              /* span fullscreen */
   height: 100vh;
   overflow: hidden;
-  background: purple;
+  background: purple;       /* controls bg */
   display: flex;
-  justify-content: center;
+  justify-content: center;   /* center content */
   align-items: center;
 }
 section h2 {
-  font-size: 10em;
-  color: pink;
+  font-size: 10em;        /* bubbles bigness */
 }
 section span {
   position: absolute;
   bottom: -50px;
-  background: transparent;
-  border-radius: 50%;
+  background: transparent;    /* makes them see-through */
+  border-radius: 50%;         /* makes them circular */
   pointer-events: none;
-  box-shadow: inset 0 0 10px rgba(235, 0, 54, 0.7);
-  animation: animate 4s linear infinite;
+  box-shadow: inset 0 0 10px rgba(235, 0, 54, 0.7);   /* bubbles color */
+  animation: animate 4s linear infinite;    /* how fast they disappear */
 }
 sectionspan: before {
   content: "";
@@ -37,17 +36,17 @@ sectionspan: before {
   width: 100%;
   height: 100%;
   transform: scale(0.25) translate(-70%, -70%);
-  background: radial-gradient(#ffffff, transparent);
+  background: radial-gradient(#ffffff, transparent);   /* takes on a light fade */
   border-radius: 50%;
 }
 @keyframes animation {
   0% {
-    transform: translateY(0%);
+    transform: translateY(0%);        /* where bubbles start */
     opacity: 1;
   }
   99% {opacity: 1;}
   100% {
-    transform: translateY(-1200%);
+    transform: translateY(-1200%);    /* how fast they disappear; where they end */
     opacity: ;
   }
 }
@@ -90,12 +89,12 @@ h2:hover {background-color: transparent;}
   --ripple-duration: 2000ms;
   --ripple-easing: cubic-bezier(0, .5, .5, 1);
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(200, 75, 75, 0.7);                /* BUBBLES txt color unhovered */
   transition: background-color 300ms, color 300ms;
 }
 .rainbow:hover {
   background-color: transparent;
-  color: white;
+  color: rgba(225, 25, 25);                   /* BUBBLES txt color hovered */
 }
 
 /* MAKES THE RAINBOW CLICK SPAN WHOLE PAGE */
